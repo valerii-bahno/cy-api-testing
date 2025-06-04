@@ -1,5 +1,9 @@
 import { defineConfig } from "cypress";
 
+module.exports = defineConfig({
+  projectId: '9jigtd',
+})
+
 export default defineConfig({
   viewportHeight: 1080,
   viewportWidth: 1920,
