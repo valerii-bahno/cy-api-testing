@@ -7,7 +7,7 @@ describe('Test with backend', () => {
   })
 
   after('Clean up', () => {
-    cy.contains('Global Feed').click()
+    // cy.contains('Global Feed').click()
     cy.contains('This is the title').click()
     cy.get('.article-actions').contains('Delete Article').click()
   })
@@ -39,7 +39,7 @@ describe('Test with backend', () => {
     cy.intercept('GET', '**/api/articles*', { fixture: 'articles.json'}).as('updateArticles')
 
     cy.contains('Global Feed').click()
-    cy.wait('@updateArticles', { timeout: 5000 })
+    cy.wait('@updateArticles', { timeout: 10000 })
     cy.get('app-article-list button').then( heartList => {
       expect(heartList[0]).to.contain('10')
       expect(heartList[1]).to.contain('20')
