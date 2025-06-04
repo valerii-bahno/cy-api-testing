@@ -4,8 +4,7 @@ import dotenv from 'dotenv';
 dotenv.config();
 
 export default defineConfig({
-  // projectId: process.env.PROJECT_ID,
-  projectId: Cypress.env('PROJECT_ID'),
+  projectId: process.env.PROJECT_ID,
   viewportHeight: 1080,
   viewportWidth: 1920,
   e2e: {
