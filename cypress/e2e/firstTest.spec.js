@@ -40,7 +40,7 @@ describe('Test with backend', () => {
 
     cy.contains('Global Feed').click()
     cy.wait('@updateArticles', { timeout: 10000 })
-    cy.get('app-article-list button').then( heartList => {
+    cy.get('app-favorite-button button').should('have.length', 2).then( heartList => {
       expect(heartList[0]).to.contain('10')
       expect(heartList[1]).to.contain('20')
     })
