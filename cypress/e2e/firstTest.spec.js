@@ -35,9 +35,10 @@ describe('Test with backend', () => {
   })
 
   it('Verify global feed likes count', () => {
-    cy.intercept('GET', 'https://conduit-api.bondaracademy.com/api/*', { fixture: 'articles.json'}).as('updateArticles')
+    cy.intercept('GET', '**/api/articles*', { fixture: 'articles.json'}).as('updateArticles')
 
     cy.contains('Global Feed').click()
+    cy.wait('@updateArticles', { timeout: 10000 })
     cy.get('app-article-list button').then( heartList => {
       expect(heartList[0]).to.contain('10')
       expect(heartList[1]).to.contain('20')
