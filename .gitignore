@@ -1,0 +1,15 @@
+node_modules/
+test-results/
+test-artifacts/
+!/*/*/test-results/
+html-report/
+test-out/
+videos/
+screenshots/
+.env
+tests-out/
+src/auth/
+
+#IDE
+.idea/
+.vscode/
