@@ -7,7 +7,6 @@ describe('Test with backend', () => {
   })
 
   after('Clean up', () => {
-    // cy.contains('Global Feed').click()
     cy.contains('This is the title').click()
     cy.get('.article-actions').contains('Delete Article').click()
   })
