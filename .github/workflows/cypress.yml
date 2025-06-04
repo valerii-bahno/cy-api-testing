@@ -3,10 +3,6 @@ on: [push]
 jobs:
   cypress-run:
     runs-on: ubuntu-latest
-    strategy:
-      fail-fast: false
-      matrix:
-        containers: [1, 2]
 
     steps:
       - name: Checkout code
@@ -15,7 +11,7 @@ jobs:
       - name: Install Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: 18
+          node-version: 22
 
       - name: Install dependencies
         run: npm install
@@ -24,7 +20,6 @@ jobs:
         uses: cypress-io/github-action@v6
         with:
           spec: cypress/e2e/firstTest.spec.js
-          parallel: true
           record: true
 
         env:
