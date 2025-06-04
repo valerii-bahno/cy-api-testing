@@ -1,7 +1,10 @@
 import { defineConfig } from "cypress";
+import dotenv from 'dotenv';
+
+dotenv.config();
 
 module.exports = defineConfig({
-  projectId: '9jigtd',
+  projectId: process.env.PROJECT_ID,
 })
 
 export default defineConfig({

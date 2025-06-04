@@ -1,7 +1,6 @@
 describe('Test with backend', () => {
 
   beforeEach('login to application', () => {
-    // cy.intercept('GET', 'https://conduit-api.bondaracademy.com/api/tags', { fixture: 'tags.json'})
     cy.intercept('GET', '**/api/tags', { fixture: 'tags.json'}).as('getTags')
     cy.loginToApplication()
     cy.wait('@getTags')
