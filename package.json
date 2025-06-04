@@ -2,8 +2,9 @@
   "name": "cy-api-testing",
   "version": "1.0.0",
   "main": "index.js",
+  "type": "module",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+  "test:e2e": "cypress run --spec cypress/e2e/firstTest.spec.js --headed"
   },
   "keywords": [],
   "author": "",

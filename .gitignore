@@ -13,3 +13,5 @@ src/auth/
 #IDE
 .idea/
 .vscode/
+
+cypress.env.json
