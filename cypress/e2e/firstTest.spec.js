@@ -39,7 +39,7 @@ describe('Test with backend', () => {
     cy.intercept('GET', '**/api/articles*', { fixture: 'articles.json'}).as('updateArticles')
 
     cy.contains('Global Feed').click()
-    cy.wait('@updateArticles')
+    cy.wait('@updateArticles', { timeout: 5000 })
     cy.get('app-article-list button').then( heartList => {
       expect(heartList[0]).to.contain('10')
       expect(heartList[1]).to.contain('20')
