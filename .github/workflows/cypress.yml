@@ -20,9 +20,6 @@ jobs:
       - name: Install dependencies
         run: npm install
 
-      # - name: Run Cy tests
-      #   run: npx cypress run --spec "cypress/e2e/firstTest.spec.js"
-
       - name: Run Cypress tests
         uses: cypress-io/github-action@v6
         with:
