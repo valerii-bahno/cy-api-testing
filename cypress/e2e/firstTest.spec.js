@@ -1,9 +1,14 @@
 describe('Test with backend', () => {
 
   beforeEach('login to application', () => {
-    cy.intercept('GET', '**/api/tags', { fixture: 'tags.json'}).as('getTags')
+    cy.intercept({ method: 'Get', path: 'tags' }, { fixture: 'tags.json' }).as('getTags')
     cy.loginToApplication()
     cy.wait('@getTags')
+  })
+
+  after('Clean up', () => {
+    cy.contains('This is the title').click()
+    cy.get('.article-actions').contains('Delete Article').click()
   })
 
   it('Verify correct request and response', () => {
@@ -11,15 +16,14 @@ describe('Test with backend', () => {
 
     cy.contains('New Article').click()
     cy.get('[formcontrolname="title"]').type('This is the title')
-    cy.get('[formcontrolname="description"]').type('This is the description')
+    cy.get('[formcontrolname="description"]').type('This is the description without intercepting')
     cy.get('[formcontrolname="body"]').type('This is the body')
     cy.contains('Publish Article').click()
 
     cy.wait('@postArticles').then( xhr => {
-      console.log(xhr)
       expect(xhr.response.statusCode).to.equal(201)
       expect(xhr.request.body.article.body).to.equal('This is the body')
-      expect(xhr.response.body.article.description).to.equal('This is the description')
+      expect(xhr.response.body.article.description).to.equal('This is the description without intercepting')
     })
   })
 
@@ -30,9 +34,8 @@ describe('Test with backend', () => {
     .and('contain', 'GitHub')
   })
 
-  it.only('Verify global feed likes count', () => {
+  it('Verify global feed likes count', () => {
     cy.intercept('GET', 'https://conduit-api.bondaracademy.com/api/*', { fixture: 'articles.json'}).as('updateArticles')
-    cy.wait('@updateArticles')
 
     cy.contains('Global Feed').click()
     cy.get('app-article-list button').then( heartList => {
@@ -48,5 +51,40 @@ describe('Test with backend', () => {
     })
 
     cy.get('app-article-list button').eq(1).click().should('contain', '21')
+  })
+
+  it('Delete a new article in a global feed', () => {
+    const bodyRequest = {
+      "article": {
+        "tagList": [],
+        "title": "Request from API",
+        "description": "Description for API",
+        "body": "Body for request",
+      }
+    }
+
+    cy.get('@token').then( token => {
+      cy.request({
+        url: 'https://conduit-api.bondaracademy.com/api/articles/',
+        headers: { 'Authorization': 'Token ' + token },
+        method: 'POST',
+        body: bodyRequest
+      }).then( response => {
+        expect(response.status).to.equal(201)
+      })
+
+      cy.contains('Global Feed').click()
+      cy.get('.article-preview').should('contain', 'Request from API')
+      cy.get('.article-preview').first().click()
+      cy.get('.article-actions').contains('Delete Article').click()
+
+      cy.request({
+        url: 'https://conduit-api.bondaracademy.com/api/articles?limit=10&offset=0',
+        headers: { 'Authorization': 'Token ' + token },
+        method: 'GET'
+      }).its('body').then( body => {
+        expect(body.articles[0].title).not.to.equal('Request from API')
+      })
+    })
   })
 })
