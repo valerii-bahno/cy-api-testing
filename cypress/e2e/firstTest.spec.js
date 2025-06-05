@@ -7,8 +7,8 @@ describe('Test with backend', () => {
   })
 
   after('Clean up', () => {
-    cy.contains('This is the title').then( title => {
-      if(title.length) {
+    cy.get('body').then( body => {
+      if (body.find('div:contains("This is the title")').length > 0) {
         cy.contains('Global Feed').click()
         cy.contains('This is the title').click()
         cy.get('.article-actions').contains('Delete Article').click()
