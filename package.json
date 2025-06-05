@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "test:e2e": "npm run prereport && npx cypress run || exit 0",
-    "delete:reports": "rimraf cypress/results",
+    "delete:reports": "npx rimraf 'cypress/results/*' 'cypress/results/junit/*' 'mochawesome-report/*'",
     "prereport": "npm run delete:reports",
     "mochawesome:merge": "npx mochawesome-merge \"cypress/results/mochawesome/*.json\" > mochawesome.json && npx marge mochawesome.json",
     "junit:merge": "npx junit-merge -d cypress/results/junit -o cypress/results/junit/results.xml",

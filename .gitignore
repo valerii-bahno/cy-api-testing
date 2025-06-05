@@ -20,3 +20,4 @@ cypress.env.json
 results/
 mochawesome-report/
 mochawesome.json
+dockerReports/
