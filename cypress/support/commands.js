@@ -25,10 +25,15 @@
 // Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... })
 
 Cypress.Commands.add('loginToApplication', () => {
+    const username = Cypress.env('USER_EMAIL');
+    const password = Cypress.env('USER_PASSWORD');
+
     const userCredentials = {
       "user": {
-        "email": Cypress.env('USER_EMAIL'),
-        "password": Cypress.env('USER_PASSWORD')
+        // "email": Cypress.env('USER_EMAIL'),
+        // "password": Cypress.env('USER_PASSWORD')
+        "email": username,
+        "password": password
       }
     }
 
