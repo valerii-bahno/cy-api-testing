@@ -9,7 +9,8 @@
     "prereport": "npm run delete:reports",
     "mochawesome:merge": "npx mochawesome-merge \"cypress/results/mochawesome/*.json\" > mochawesome.json && npx marge mochawesome.json",
     "junit:merge": "npx junit-merge -d cypress/results/junit -o cypress/results/junit/results.xml",
-    "cypress:e2e": "npm run test:e2e && npm run junit:merge && npm run mochawesome:merge"
+    "cypress:e2e": "npm run test:e2e && npm run junit:merge && npm run mochawesome:merge",
+    "cy:run_secondTest": "npx cypress run --spec 'cypress/e2e/secondTest.spec.js' --browser edge --headed"
   },
   "keywords": [],
   "author": "",
