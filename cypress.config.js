@@ -7,6 +7,11 @@ export default defineConfig({
   projectId: '9jigtd',
   viewportHeight: 1080,
   viewportWidth: 1920,
+  retries: {
+    runMode: 1,
+    openMode: 0
+  },
+
   e2e: {
     defaultCommandTimeout: 10000,
     setupNodeEvents(on, config) {

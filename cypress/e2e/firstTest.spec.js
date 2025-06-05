@@ -37,7 +37,7 @@ describe('Test with backend', () => {
     .and('contain', 'GitHub')
   })
 
-  it('Verify global feed likes count', () => {
+  it('Verify global feed likes count', { retries: 2 }, () => {
     cy.intercept('GET', '**/api/articles*', { fixture: 'articles.json'}).as('updateArticles')
 
     cy.contains('Global Feed').click()
