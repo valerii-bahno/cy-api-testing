@@ -17,10 +17,7 @@ jobs:
         run: npm install
 
       - name: Run Cypress tests
-        uses: cypress-io/github-action@v6
-        with:
-          spec: cypress/e2e/*Test.spec.js
-          record: true
+        run: npm run cypress:e2e
 
         env:
           CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
