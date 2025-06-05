@@ -1,5 +1,3 @@
-/// <reference types="cypress" />
-
 describe('Test with backend', () => {
 
   beforeEach('login to application', () => {

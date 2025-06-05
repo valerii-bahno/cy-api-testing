@@ -1,5 +1,3 @@
-/ <reference types="cypress" />
-
 describe('Test log out', () => {
     beforeEach('login to application', () => {
         cy.loginToApplication()
