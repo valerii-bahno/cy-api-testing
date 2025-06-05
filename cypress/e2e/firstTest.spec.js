@@ -6,15 +6,24 @@ describe('Test with backend', () => {
     cy.wait('@getTags')
   })
 
-  after('Clean up', () => {
-    cy.get('body').then( body => {
-      if (body.find('div:contains("This is the title")').length > 0) {
-        cy.contains('Global Feed').click()
-        cy.contains('This is the title').click()
-        cy.get('.article-actions').contains('Delete Article').click()
+  after('Cleanup article via API', () => {
+  cy.get('@token').then((token) => {
+    cy.request({
+      method: 'GET',
+      url: 'https://conduit-api.bondaracademy.com/api/articles?limit=10&offset=0',
+      headers: { Authorization: `Token ${token}` },
+    }).then((res) => {
+      const target = res.body.articles.find((a) => a.title === 'This is the title')
+      if (target) {
+        cy.request({
+          method: 'DELETE',
+          url: `https://conduit-api.bondaracademy.com/api/articles/${target.slug}`,
+          headers: { Authorization: `Token ${token}` },
+        })
       }
     })
   })
+})
 
   it('Verify correct request and response', () => {
     cy.intercept('POST', 'https://conduit-api.bondaracademy.com/api/articles/').as('postArticles')
