@@ -11,6 +11,12 @@ export default defineConfig({
     runMode: 1,
     openMode: 0
   },
+  screenshotOnRunFailure: true,
+  screenshotsFolder: 'cypress/screenshots',
+  reporter: 'cypress-multi-reporters',
+  reporterOptions: {
+    configFile: 'reporter-config.json',
+  },
 
   e2e: {
     defaultCommandTimeout: 10000,

@@ -15,3 +15,8 @@ src/auth/
 .vscode/
 
 cypress.env.json
+
+# reporters
+results/
+mochawesome-report/
+mochawesome.json
