@@ -19,6 +19,17 @@ jobs:
       - name: Run Cypress tests
         run: npm run cypress:e2e
 
+      - name: Archive test reports
+        run: |
+          mkdir -p artifacts
+          zip -r artifacts/test-reports.zip cypress/results mochawesome.json || true
+
+      - name: Upload test reports artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: test-reports
+          path: artifacts/test-reports.zip
+
         env:
           CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
