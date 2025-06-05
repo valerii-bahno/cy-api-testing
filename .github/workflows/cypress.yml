@@ -22,7 +22,7 @@ jobs:
       - name: Archive test reports
         run: |
           mkdir -p artifacts
-          zip -r artifacts/test-reports.zip cypress/results mochawesome.json || true
+          zip -r artifacts/test-reports.zip cypress/results mochawesome-report mochawesome.json || true
 
       - name: Upload test reports artifact
         uses: actions/upload-artifact@v4
