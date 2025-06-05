@@ -8,4 +8,6 @@ describe('Test log out', () => {
         cy.contains('Or click here to logout').click()
         cy.get('.navbar-nav').should('contain', 'Sign up')
     })
+
+    const test = 0
 })
