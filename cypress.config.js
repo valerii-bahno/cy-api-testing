@@ -17,7 +17,6 @@ export default defineConfig({
   reporterOptions: {
     configFile: 'reporter-config.json',
   },
-
   e2e: {
     defaultCommandTimeout: 10000,
     baseUrl: 'https://conduit.bondaracademy.com/',
